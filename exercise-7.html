@@ -15,24 +15,109 @@
     4. the ability to edit an existing task
 
     */
-    </script>
-    <style>
-    #wrapper {
-      max-width: 480px;
-      margin: auto;
-    }
+      $(document).ready(()=>  {
 
-    #description, #search, #todo-list {
-      font-size: 1.5em;
+
+
+        $("#add-button").click(()=>{ 
+
+          let txt=$('#description').val();
+
+          $('#todo-list').append(`<li>` +`<input id="checkBox" type="checkbox">`+`${txt}` + ` ` +  `<button id="delete"> X </button>` + `</li>`);
+
+          $('#description').val("");
+
+        });
+
+        $(document).on("click", "#delete", function() {
+          $(this).parent().remove();
+        });
+
+        $(document).on("click", "#checkBox", function(){
+          (this.checked)?$(this).parent().attr("class","checked"):$(this).parent().attr("class","");
+        });
+      });
+
+
+
+      </script>
+
+
+  <style>
+      #wrapper {
+        max-width: 480px;
+        margin: auto;
+      }
+
+      #description, #search, #todo-list {
+        font-size: 1.5em;
+        padding: 2px;
+      }
+      
+
+      #delete{
+      position: absolute;
+      border-radius: 5px;
+      top:-5px;
+      left:420px;
+      width: 40px;
+      margin: 10px;
+      font-weight: bold;
+      font-size: 20px;
+      }
+
+      #checkBox{
+        width: 20px;
+        height: 20px;
+        margin:5px;
+        position: relative;
+        top:2px;
+      }
+
+     .checked{
+       text-decoration: line-through;
+       font-style:italic;
+       color:gray;
+     }
+
+     ul {
+    list-style-type:none;
+    position: relative;
+    /* left:-45px; */
+    line-height: 25px;
     }
+    li {
+      background: rgb(189, 189, 189); 
+      border-radius: 5px;
+      border: 1px solid darkslategray;
+      position: relative;
+      top: 6px;
+      padding: 5px;
+ 
+      }
+    li:nth-child(odd){
+      background: rgb(255, 255, 255); 
+      }
+
+    body{
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 16px;
+    }
+    
+    #add-button{
+
+      height: 35px;
+      position: relative;
+      top:-4px;
+    }
+      
     </style>
   </head>
   <body>
     <div id="wrapper">
-      <input id="description" type="text" name="description">
+      <input id="description" type="text" name="description" placeholder="Type your task here">
       <button id="add-button">Add Task</button>
       <ul id="todo-list">
-        <li>Feed the cat</li>
       </ul>
     </div>
   </body>
